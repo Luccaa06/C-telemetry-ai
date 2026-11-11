@@ -99,6 +99,7 @@
 
         .hero img.logo-grande {
             max-width: 320px;
+            width: 100%;
             height: auto;
             margin-bottom: 15px;
         }
@@ -155,7 +156,7 @@
             100% { transform: translateX(0%); }
         }
 
-        /* SECCIÓN DE INFORMACIÓN (Marrón más oscuro y texto justificado) */
+        /* SECCIÓN DE INFORMACIÓN */
         .info-section {
             max-width: 900px;
             margin: 30px auto 60px;
@@ -242,10 +243,11 @@
             background: var(--blanco);
             padding: 35px 40px;
             border-radius: 12px;
-            width: 100%;
+            width: 90%;
             max-width: 440px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             position: relative;
+            box-sizing: border-box;
         }
 
         .modal-card h3 {
@@ -330,6 +332,91 @@
             text-align: center;
             font-weight: bold;
         }
+
+        /* =================================================== */
+        /* REGLAS RESPONSIVAS PARA TABLETS Y TELÉFONOS MÓVILES */
+        /* =================================================== */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+
+            .brand-logo {
+                font-size: 1.6rem;
+            }
+
+            .auth-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero {
+                padding: 30px 15px 20px;
+            }
+
+            .hero img.logo-grande {
+                max-width: 220px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero h2 {
+                font-size: 1.1rem;
+                margin-bottom: 25px;
+            }
+
+            .carousel-container {
+                height: 220px; /* Reducimos la altura para que no ocupe toda la pantalla del móvil */
+                margin: 0 15px 30px;
+                border-radius: 8px;
+            }
+
+            .info-section {
+                padding: 25px 20px;
+                margin: 20px 15px 40px;
+                border-radius: 10px;
+            }
+
+            .info-section p {
+                font-size: 0.98rem;
+                text-align: left; /* Alineado a la izquierda en móvil para evitar huecos entre palabras */
+            }
+
+            .highlight-box {
+                padding: 20px;
+                text-align: left;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+                padding: 25px 20px;
+            }
+
+            footer .contact-info {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modal-card {
+                padding: 25px 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr; /* Pasa el formulario de registro a 1 sola columna ordenada */
+            }
+
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+        }
     </style>
 </head>
 <body>
@@ -350,7 +437,7 @@
         <h2>Anticipamos el fallo para que tú nunca te detengas.</h2>
     </header>
 
-    <!-- CARRUSEL SLIDER DE FOTOS (PELELS) -->
+    <!-- CARRUSEL SLIDER DE FOTOS -->
     <div class="carousel-container">
         <div class="carousel-slide">
             <img src="humo1.jpg" alt="Avería en motor de coche con humo">
@@ -366,10 +453,10 @@
             En <strong>C Telemetry AI</strong> hemos desarrollado una plataforma tecnológica pionera de mantenimiento predictivo basada en redes de procesamiento de telemetría y algoritmos de Inteligencia Artificial de última generación. A diferencia de los lectores mecánicos tradicionales que solo registran averías cuando el daño ya es irreparable, nuestra arquitectura de diagnóstico continuo se conecta directamente a la red CAN Bus del vehículo para interpretar las fluctuaciones térmicas, presiones y desviaciones operativas en tiempo real.
         </p>
         <p>
-            La verdadera ventaja competitiva de nuestro motor de IA radica en su capacidad de **aprendizaje adaptativo constante**. Cada vehículo genera un perfil de comportamiento dinámico único; la Inteligencia Artificial procesa la tasa de incremento de gradientes clave (como diferenciales de temperatura o desviaciones de presión de aceite) detectando patrones anómalos imperceptibles para el conductor días o semanas antes de que se encienda un testigo en el cuadro de mandos. Esto permite programar visitas al taller de forma proactiva, eliminando de raíz las roturas catastróficas en carretera y optimizando el ciclo de vida de los componentes del motor.
+            La verdadera ventaja competitiva de nuestro motor de IA radica en su capacidad de <strong>aprendizaje adaptativo constante</strong>. Cada vehículo genera un perfil de comportamiento dinámico único; la Inteligencia Artificial procesa la tasa de incremento de gradientes clave (como diferenciales de temperatura o desviaciones de presión de aceite) detectando patrones anómalos imperceptibles para el conductor días o semanas antes de que se encienda un testigo en el cuadro de mandos. Esto permite programar visitas al taller de forma proactiva, eliminando de raíz las roturas catastróficas en carretera y optimizando el ciclo de vida de los componentes del motor.
         </p>
         <p>
-            Al tratarse de una **tecnología multimarca y universal**, nuestra solución ofrece una cobertura integral adaptada a cualquier perfil de uso. Es la herramienta definitiva para **conductores particulares** que desean erradicar la incertidumbre de quedarse tirados en la carretera, así como para **flotas comerciales, taxistas y servicios de transporte de pasajeros**, para quienes un vehículo inmovilizado por avería implica pérdidas económicas directas y costes desproporcionados de grúa y reparación urgente.
+            Al tratarse de una <strong>tecnología multimarca y universal</strong>, nuestra solución ofrece una cobertura integral adaptada a cualquier perfil de uso. Es la herramienta definitiva para <strong>conductores particulares</strong> que desean erradicar la incertidumbre de quedarse tirados en la carretera, así como para <strong>flotas comerciales, taxistas y servicios de transporte de pasajeros</strong>, para quienes un vehículo inmovilizado por avería implica pérdidas económicas directas y costes desproporcionados de grúa y reparación urgente.
         </p>
 
         <div class="highlight-box">
