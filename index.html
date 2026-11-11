@@ -3,80 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C Telemetry AI - Dashboard</title>
+    <title>C Telemetry AI - Mantenimiento Predictivo</title>
     <style>
-        body { background-color: #0d1117; color: #c9d1d9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; }
-        header { border-bottom: 2px solid #21262d; padding-bottom: 10px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
-        h1 { color: #58a6ff; margin: 0; font-style: italic; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .card { background-color: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; text-align: center; }
-        .value { font-size: 2.5em; font-weight: bold; margin: 10px 0; color: #fff; }
-        .status-ok { color: #3fb950; }
-        .status-warn { color: #d29922; }
-        .status-danger { color: #f85149; }
-        button { background-color: #238636; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 1em; font-weight: bold; width: 100%; margin-top: 15px; }
-        button:hover { background-color: #2ea043; }
-        .ai-panel { background-color: #0d1117; border: 1px solid #3fb950; margin-top: 15px; padding: 15px; border-radius: 5px; text-align: left;}
+        :root {
+            --turquesa: #00C4B5;
+            --turquesa-oscuro: #009B8E;
+            --blanco: #FFFFFF;
+            --beige: #F9F8F4;
+            --texto-principal: #2C3E50;
+            --texto-secundario: #5D6D7E;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--beige);
+            color: var(--texto-principal);
+            line-height: 1.6;
+        }
+
+        /* BARRA DE NAVEGACIÓN */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: var(--blanco);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-signin {
+            background-color: transparent;
+            color: var(--texto-principal);
+            border: 2px solid var(--texto-principal);
+        }
+
+        .btn-signin:hover {
+            background-color: var(--texto-principal);
+            color: var(--blanco);
+        }
+
+        .btn-login {
+            background-color: var(--turquesa);
+            color: var(--blanco);
+        }
+
+        .btn-login:hover {
+            background-color: var(--turquesa-oscuro);
+        }
+
+        /* SECCIÓN PRINCIPAL (HERO) */
+        .hero {
+            text-align: center;
+            padding: 60px 20px 40px;
+        }
+
+        .hero img.logo-grande {
+            max-width: 350px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin: 0 0 10px;
+            color: var(--texto-principal);
+            letter-spacing: -1px;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--turquesa-oscuro);
+            margin: 0 0 40px;
+            font-style: italic;
+        }
+
+        /* SECCIÓN DE INFORMACIÓN */
+        .info-section {
+            max-width: 900px;
+            margin: 40px auto 60px;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .info-section p {
+            font-size: 1.2rem;
+            color: var(--texto-secundario);
+            margin-bottom: 25px;
+        }
+
+        .highlight-box {
+            background-color: var(--blanco);
+            border-left: 5px solid var(--turquesa);
+            padding: 30px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            text-align: left;
+        }
+
+        .highlight-box h3 {
+            color: var(--turquesa);
+            margin-top: 0;
+        }
     </style>
 </head>
 <body>
-    <header>
+
+    <nav>
+        <div style="font-size: 1.5rem; font-weight: 800; color: var(--texto-principal);">C <span style="color: var(--turquesa);">Telemetry AI</span></div>
+        <div class="auth-buttons">
+            <a href="#" class="btn btn-signin" onclick="alert('El registro se conectará en el futuro.')">Sign In</a>
+            <a href="#" class="btn btn-login" onclick="alert('El panel de control se conectará en el futuro.')">Log In</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <!-- AQUÍ SE CARGA LA IMAGEN CON EL NOMBRE EXACTO logo.png -->
+        <img src="logo.png" alt="Logo C Telemetry AI" class="logo-grande">
+        
         <h1>C Telemetry AI</h1>
-        <span>Estado: <strong style="color: #3fb950;">Conectado a Datalogger</strong></span>
+        <h2>Anticipamos el fallo para que tú nunca te detengas.</h2>
     </header>
 
-    <div class="grid">
-        <div class="card">
-            <h3>RPM Motor</h3>
-            <div class="value" id="rpm-val">2,500</div>
-            <div>Rango óptimo</div>
-        </div>
-        
-        <div class="card">
-            <h3>Temp. Refrigerante</h3>
-            <div class="value status-ok" id="temp-val">90 ºC</div>
-            <div>Límite rotura: 105 ºC</div>
-        </div>
+    <section class="info-section">
+        <p>
+            En <strong>C Telemetry AI</strong> hemos desarrollado un sistema multimarca impulsado por Inteligencia Artificial patentada para revolucionar el mantenimiento predictivo de vehículos. Nuestro hardware se conecta directamente a la telemetría de tu coche para monitorizar su salud en tiempo real.
+        </p>
+        <p>
+            La ventaja de nuestra IA es el aprendizaje constante: con cada kilómetro recorrido, el sistema aprende los patrones únicos de tu motor. Esto nos permite detectar anomalías y predecir fallos graves semanas antes de que ocurran. Nuestro objetivo es que puedas acudir al mecánico de forma proactiva, evitando roturas en carretera y ahorrando miles de euros en averías catastróficas.
+        </p>
+        <p>
+            Una solución indispensable tanto para <strong>conductores particulares</strong> que buscan tranquilidad, como para <strong>flotas comerciales y taxistas</strong> que no pueden permitirse tener un vehículo inmovilizado.
+        </p>
 
-        <div class="card" style="grid-column: 1 / -1;">
-            <h3>Análisis Predictivo IA (Modelo `.diff()`)</h3>
-            <div class="ai-panel" id="ai-status">
-                <strong style="color: #3fb950;">[SISTEMA OK]</strong> Tasa de calentamiento estable. No se detectan anomalías en la refrigeración.
-            </div>
-            <button onclick="simularFallo()">Simular Fuga de Refrigerante (Test IA)</button>
+        <div class="highlight-box">
+            <h3>¿Por qué crear tu cuenta?</h3>
+            <p style="font-size: 1.1rem; margin-bottom: 0;">
+                Al registrarte e iniciar sesión (<strong>Log In</strong>), tendrás acceso privado a tu propia interfaz de telemetría. Podrás visualizar gráficos detallados en tiempo real, comprobar el estado exacto de los sensores y recibir la valoración en directo de nuestra IA sobre la salud general de tu vehículo.
+            </p>
         </div>
-    </div>
+    </section>
 
-    <script>
-        let temp = 90;
-        let rpm = 2500;
-        
-        function simularFallo() {
-            let intervalo = setInterval(() => {
-                temp += Math.random() * 2; // Sube la temperatura artificialmente
-                rpm = 2500 + Math.floor(Math.random() * 200 - 100);
-                
-                document.getElementById('rpm-val').innerText = rpm.toLocaleString();
-                let tempEl = document.getElementById('temp-val');
-                let aiEl = document.getElementById('ai-status');
-                
-                tempEl.innerText = temp.toFixed(1) + " ºC";
-
-                // LÓGICA DE LA IA QUE HICISTE EN PANDAS
-                if (temp > 105) {
-                    // Mantenimiento Reactivo (Tarde)
-                    tempEl.className = "value status-danger";
-                    aiEl.style.borderColor = "#f85149";
-                    aiEl.innerHTML = '<strong style="color: #f85149;">[FALLO CRÍTICO]</strong> Límite térmico superado. Detenga el vehículo inmediatamente.';
-                    clearInterval(intervalo);
-                } else if (temp > 95) {
-                    // Mantenimiento Predictivo (Alerta temprana por tasa de incremento)
-                    tempEl.className = "value status-warn";
-                    aiEl.style.borderColor = "#d29922";
-                    aiEl.innerHTML = '<strong style="color: #d29922;">[ALERTA TEMPRANA]</strong> Anomalía detectada: La tasa de incremento de temperatura (dT/dt) sugiere un fallo inminente en la bomba de agua. Revisar al llegar a boxes.';
-                }
-            }, 800);
-        }
-    </script>
 </body>
 </html>
