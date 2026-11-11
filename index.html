@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C Telemetry AI - Dashboard</title>
+    <style>
+        body { background-color: #0d1117; color: #c9d1d9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; }
+        header { border-bottom: 2px solid #21262d; padding-bottom: 10px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        h1 { color: #58a6ff; margin: 0; font-style: italic; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background-color: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; text-align: center; }
+        .value { font-size: 2.5em; font-weight: bold; margin: 10px 0; color: #fff; }
+        .status-ok { color: #3fb950; }
+        .status-warn { color: #d29922; }
+        .status-danger { color: #f85149; }
+        button { background-color: #238636; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 1em; font-weight: bold; width: 100%; margin-top: 15px; }
+        button:hover { background-color: #2ea043; }
+        .ai-panel { background-color: #0d1117; border: 1px solid #3fb950; margin-top: 15px; padding: 15px; border-radius: 5px; text-align: left;}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>C Telemetry AI</h1>
+        <span>Estado: <strong style="color: #3fb950;">Conectado a Datalogger</strong></span>
+    </header>
+
+    <div class="grid">
+        <div class="card">
+            <h3>RPM Motor</h3>
+            <div class="value" id="rpm-val">2,500</div>
+            <div>Rango óptimo</div>
+        </div>
+        
+        <div class="card">
+            <h3>Temp. Refrigerante</h3>
+            <div class="value status-ok" id="temp-val">90 ºC</div>
+            <div>Límite rotura: 105 ºC</div>
+        </div>
+
+        <div class="card" style="grid-column: 1 / -1;">
+            <h3>Análisis Predictivo IA (Modelo `.diff()`)</h3>
+            <div class="ai-panel" id="ai-status">
+                <strong style="color: #3fb950;">[SISTEMA OK]</strong> Tasa de calentamiento estable. No se detectan anomalías en la refrigeración.
+            </div>
+            <button onclick="simularFallo()">Simular Fuga de Refrigerante (Test IA)</button>
+        </div>
+    </div>
+
+    <script>
+        let temp = 90;
+        let rpm = 2500;
+        
+        function simularFallo() {
+            let intervalo = setInterval(() => {
+                temp += Math.random() * 2; // Sube la temperatura artificialmente
+                rpm = 2500 + Math.floor(Math.random() * 200 - 100);
+                
+                document.getElementById('rpm-val').innerText = rpm.toLocaleString();
+                let tempEl = document.getElementById('temp-val');
+                let aiEl = document.getElementById('ai-status');
+                
+                tempEl.innerText = temp.toFixed(1) + " ºC";
+
+                // LÓGICA DE LA IA QUE HICISTE EN PANDAS
+                if (temp > 105) {
+                    // Mantenimiento Reactivo (Tarde)
+                    tempEl.className = "value status-danger";
+                    aiEl.style.borderColor = "#f85149";
+                    aiEl.innerHTML = '<strong style="color: #f85149;">[FALLO CRÍTICO]</strong> Límite térmico superado. Detenga el vehículo inmediatamente.';
+                    clearInterval(intervalo);
+                } else if (temp > 95) {
+                    // Mantenimiento Predictivo (Alerta temprana por tasa de incremento)
+                    tempEl.className = "value status-warn";
+                    aiEl.style.borderColor = "#d29922";
+                    aiEl.innerHTML = '<strong style="color: #d29922;">[ALERTA TEMPRANA]</strong> Anomalía detectada: La tasa de incremento de temperatura (dT/dt) sugiere un fallo inminente en la bomba de agua. Revisar al llegar a boxes.';
+                }
+            }, 800);
+        }
+    </script>
+</body>
+</html>
