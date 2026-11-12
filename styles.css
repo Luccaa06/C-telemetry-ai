@@ -1,0 +1,446 @@
+:root {
+    --turquesa: #00C4B5;
+    --turquesa-oscuro: #009B8E;
+    --marron-cabecera: #D9CEC1;
+    --marron-cuadro: #C8B9A6;
+    --blanco: #FFFFFF;
+    --beige-fondo: #F5F1EB;
+    --texto-oscuro: #2A211B;
+    --texto-secundario: #4A3E37;
+    --rojo-error: #E74C3C;
+    --verde-exito: #1E8449;
+}
+
+body {
+    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--beige-fondo);
+    color: var(--texto-oscuro);
+    line-height: 1.7;
+}
+
+/* BARRA DE NAVEGACIÓN */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 50px;
+    background-color: var(--marron-cabecera);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.brand-logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.9rem;
+    font-weight: 900;
+    color: var(--texto-oscuro);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.brand-logo span {
+    color: var(--turquesa-oscuro);
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-size: 0.95rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-signin {
+    background-color: transparent;
+    color: var(--texto-oscuro);
+    border: 2px solid var(--texto-oscuro);
+}
+
+.btn-signin:hover {
+    background-color: var(--texto-oscuro);
+    color: var(--blanco);
+}
+
+.btn-login {
+    background-color: var(--turquesa);
+    color: var(--blanco);
+}
+
+.btn-login:hover {
+    background-color: var(--turquesa-oscuro);
+}
+
+/* SECCIÓN PRINCIPAL (HERO) */
+.hero {
+    text-align: center;
+    padding: 40px 20px 30px;
+}
+
+.hero img.logo-grande {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.2rem;
+    margin: 0 0 10px;
+    color: var(--texto-oscuro);
+    letter-spacing: -1px;
+}
+
+.hero h2 {
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--turquesa-oscuro);
+    margin: 0 0 35px;
+    font-style: italic;
+}
+
+/* CARRUSEL DE IMÁGENES */
+.carousel-container {
+    max-width: 900px;
+    height: 420px;
+    margin: 0 auto 40px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    position: relative;
+}
+
+.carousel-slide {
+    display: flex;
+    width: 400%;
+    height: 100%;
+    animation: slideAnimation 14s infinite ease-in-out;
+}
+
+.carousel-slide img {
+    width: 25%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@keyframes slideAnimation {
+    0% { transform: translateX(0%); }
+    20% { transform: translateX(0%); }
+    25% { transform: translateX(-25%); }
+    45% { transform: translateX(-25%); }
+    50% { transform: translateX(-50%); }
+    70% { transform: translateX(-50%); }
+    75% { transform: translateX(-75%); }
+    95% { transform: translateX(-75%); }
+    100% { transform: translateX(0%); }
+}
+
+/* SECCIÓN DE INFORMACIÓN */
+.info-section {
+    max-width: 900px;
+    margin: 30px auto 60px;
+    padding: 40px 45px;
+    background-color: var(--marron-cuadro);
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+    box-sizing: border-box;
+}
+
+.info-section p {
+    font-size: 1.1rem;
+    color: var(--texto-oscuro);
+    margin-bottom: 22px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.highlight-box {
+    background-color: var(--beige-fondo);
+    border-left: 5px solid var(--turquesa-oscuro);
+    padding: 25px 30px;
+    border-radius: 0 8px 8px 0;
+    margin-top: 35px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    text-align: justify;
+}
+
+.highlight-box h3 {
+    color: var(--turquesa-oscuro);
+    margin-top: 0;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+}
+
+/* PIE DE PÁGINA */
+footer {
+    background-color: var(--marron-cabecera);
+    padding: 25px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    font-size: 0.95rem;
+}
+
+footer .copyright {
+    color: var(--texto-secundario);
+    font-weight: 500;
+}
+
+footer .contact-info {
+    text-align: right;
+    color: var(--texto-oscuro);
+    font-weight: 600;
+}
+
+footer .contact-info a {
+    color: var(--texto-oscuro);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+footer .contact-info a:hover {
+    color: var(--turquesa-oscuro);
+}
+
+/* MODALES */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.modal-card {
+    background: var(--blanco);
+    padding: 32px 36px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 480px;
+    max-height: 92vh;
+    overflow-y: auto;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    position: relative;
+    box-sizing: border-box;
+    margin: auto;
+}
+
+.modal-card h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--texto-oscuro);
+    font-size: 1.5rem;
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.close-btn {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    font-size: 1.7rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--texto-secundario);
+    padding: 4px;
+}
+
+/* CUADRÍCULA PROPORCIONADA DEL FORMULARIO */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 12px;
+}
+
+.col-6 {
+    grid-column: span 6;
+}
+
+.col-9 {
+    grid-column: span 9;
+}
+
+.col-3 {
+    grid-column: span 3;
+}
+
+.col-12 {
+    grid-column: span 12;
+}
+
+.form-group {
+    margin-bottom: 6px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.83rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--texto-secundario);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #D5D8DC;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--blanco);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--turquesa);
+    box-shadow: 0 0 0 3px rgba(0, 196, 181, 0.15);
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--turquesa);
+    color: var(--blanco);
+    font-size: 1rem;
+    margin-top: 14px;
+}
+
+.btn-submit:hover {
+    background-color: var(--turquesa-oscuro);
+}
+
+.error-msg {
+    color: var(--rojo-error);
+    font-size: 0.85rem;
+    margin-top: 8px;
+    display: none;
+    text-align: center;
+    font-weight: 500;
+}
+
+.success-box {
+    background-color: #EAFAF1;
+    border: 1px solid #2ECC71;
+    color: var(--verde-exito);
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 0.92rem;
+    text-align: center;
+    margin-top: 10px;
+    display: none;
+}
+
+/* REGLAS RESPONSIVAS PARA TABLET Y MÓVIL */
+@media (max-width: 768px) {
+    nav {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+
+    .brand-logo {
+        font-size: 1.6rem;
+    }
+
+    .auth-buttons {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .hero {
+        padding: 30px 15px 20px;
+    }
+
+    .hero img.logo-grande {
+        max-width: 210px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero h2 {
+        font-size: 1.1rem;
+        margin-bottom: 25px;
+    }
+
+    .carousel-container {
+        height: 220px;
+        margin: 0 15px 30px;
+        border-radius: 8px;
+    }
+
+    .info-section {
+        padding: 25px 20px;
+        margin: 20px 15px 40px;
+        border-radius: 10px;
+    }
+
+    .info-section p {
+        font-size: 0.98rem;
+        text-align: left;
+    }
+
+    .highlight-box {
+        padding: 20px;
+        text-align: left;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        padding: 25px 20px;
+    }
+
+    footer .contact-info {
+        text-align: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .modal-card {
+        padding: 24px 18px;
+    }
+
+    .modal-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .col-6, .col-9, .col-3, .col-12 {
+        grid-column: span 12;
+    }
+
+    .form-group input {
+        font-size: 16px;
+        padding: 11px 12px;
+    }
+}

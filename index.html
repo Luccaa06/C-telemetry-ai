@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C Telemetry AI - Mantenimiento Predictivo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- NAV BAR -->
+    <nav>
+        <div class="brand-logo">C <span>Telemetry AI</span></div>
+        <div class="auth-buttons">
+            <button class="btn btn-signin" onclick="abrirModal('modal-signup')">Sign In</button>
+            <button class="btn btn-login" onclick="abrirModal('modal-login')">Log In</button>
+        </div>
+    </nav>
+
+    <!-- HERO HEADER -->
+    <header class="hero">
+        <img src="logo.png" alt="Logo C Telemetry AI" class="logo-grande">
+        <h1>C Telemetry AI</h1>
+        <h2>Anticipamos el fallo para que tú nunca te detengas.</h2>
+    </header>
+
+    <!-- CARRUSEL SLIDER DE FOTOS -->
+    <div class="carousel-container">
+        <div class="carousel-slide">
+            <img src="humo1.jpg" alt="Avería en motor de coche con humo">
+            <img src="grua1.jpg" alt="Coche siendo remolcado por grúa">
+            <img src="humo2.jpg" alt="Fallo mecánico y sobrecalentamiento de motor">
+            <img src="grua2.jpg" alt="Asistencia en carretera para vehículo inmovilizado">
+        </div>
+    </div>
+
+    <!-- SECCIÓN DE TEXTO INFORMATIVO -->
+    <section class="info-section">
+        <p>
+            En <strong>C Telemetry AI</strong> hemos desarrollado una plataforma tecnológica pionera de mantenimiento predictivo basada en redes de procesamiento de telemetría y algoritmos de Inteligencia Artificial de última generación. A diferencia de los lectores mecánicos tradicionales que solo registran averías cuando el daño ya es irreparable, nuestra arquitectura de diagnóstico continuo se conecta directamente a la red CAN Bus del vehículo para interpretar las fluctuaciones térmicas, presiones y desviaciones operativas en tiempo real.
+        </p>
+        <p>
+            La verdadera ventaja competitiva de nuestro motor de IA radica en su capacidad de <strong>aprendizaje adaptativo constante</strong>. Cada vehículo genera un perfil de comportamiento dinámico único; la Inteligencia Artificial procesa la tasa de incremento de gradientes clave (como diferenciales de temperatura o desviaciones de presión de aceite) detectando patrones anómalos imperceptibles para el conductor días o semanas antes de que se encienda un testigo en el cuadro de mandos. Esto permite programar visitas al taller de forma proactiva, eliminando de raíz las roturas catastróficas en carretera y optimizando el ciclo de vida de los componentes del motor.
+        </p>
+        <p>
+            Al tratarse de una <strong>tecnología multimarca y universal</strong>, nuestra solución ofrece una cobertura integral adaptada a cualquier perfil de uso. Es la herramienta definitiva para <strong>conductores particulares</strong> que desean erradicar la incertidumbre de quedarse tirados en la carretera, así como para <strong>flotas comerciales, taxistas y servicios de transporte de pasajeros</strong>, para quienes un vehículo inmovilizado por avería implica pérdidas económicas directas y costes desproporcionados de grúa y reparación urgente.
+        </p>
+
+        <div class="highlight-box">
+            <h3>Acceso Exclusivo al Panel Privado</h3>
+            <p style="margin-bottom: 0;">
+                Al completar tu registro e iniciar sesión en <strong>C Telemetry AI</strong>, accederás de manera inmediata a tu Dashboard corporativo personalizado. Desde este panel privado podrás monitorizar la telemetría en tiempo vivo, analizar gráficas de tendencia con la evolución de los sensores clave de tu motor y revisar la valoración diagnóstica emitida en tiempo real por nuestra IA sobre la salud integral de tu vehículo.
+            </p>
+        </div>
+    </section>
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+        <div class="copyright">
+            © 2026 C Telemetry AI. Todos los derechos reservados.
+        </div>
+        <div class="contact-info">
+            ¿Tienes alguna consulta? Escríbenos a: <br>
+            <a href="mailto:ctelemetryai@gmail.com">ctelemetryai@gmail.com</a>
+        </div>
+    </footer>
+
+    <!-- MODAL REGISTRO (SIGN IN) -->
+    <div class="modal-overlay" id="modal-signup">
+        <div class="modal-card">
+            <span class="close-btn" onclick="cerrarModal('modal-signup')">&times;</span>
+            <h3>Crear Cuenta</h3>
+            <form id="form-signup" onsubmit="procesarRegistro(event)">
+                <div class="form-grid">
+                    <div class="form-group col-6">
+                        <label>Nombre</label>
+                        <input type="text" id="reg-nombre" required>
+                    </div>
+                    <div class="form-group col-6">
+                        <label>Apellidos</label>
+                        <input type="text" id="reg-apellidos" required>
+                    </div>
+                    <div class="form-group col-9">
+                        <label>Correo Electrónico</label>
+                        <input type="email" id="reg-email" placeholder="ejemplo@correo.com" required>
+                    </div>
+                    <div class="form-group col-3">
+                        <label>Edad</label>
+                        <input type="number" id="reg-edad" min="16" max="100" required>
+                    </div>
+                    <div class="form-group col-6">
+                        <label>Contraseña (mín. 6)</label>
+                        <input type="password" id="reg-pass1" minlength="6" required>
+                    </div>
+                    <div class="form-group col-6">
+                        <label>Confirmar</label>
+                        <input type="password" id="reg-pass2" minlength="6" required>
+                    </div>
+                </div>
+                <div class="error-msg" id="reg-error"></div>
+                <div class="success-box" id="reg-success"></div>
+                <button type="submit" id="btn-reg-submit" class="btn btn-submit">Registrarse y Enviar Correo</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL LOGIN (LOG IN) -->
+    <div class="modal-overlay" id="modal-login">
+        <div class="modal-card">
+            <span class="close-btn" onclick="cerrarModal('modal-login')">&times;</span>
+            <h3>Iniciar Sesión</h3>
+            <form onsubmit="procesarLogin(event)">
+                <div class="form-group" style="margin-bottom: 14px;">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="login-email" placeholder="ejemplo@correo.com" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 14px;">
+                    <label>Contraseña</label>
+                    <input type="password" id="login-pass" required>
+                </div>
+                <div class="error-msg" id="login-error"></div>
+                <button type="submit" id="btn-login-submit" class="btn btn-submit">Entrar al Panel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- SCRIPTS DE SUPABASE Y AUTENTICACIÓN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js"></script>
+</body>
+</html>
