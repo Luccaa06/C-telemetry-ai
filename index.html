@@ -9,17 +9,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
+    <!-- LIBRERÍA OFICIAL DE SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <style>
         :root {
             --turquesa: #00C4B5;
             --turquesa-oscuro: #009B8E;
-            --marron-cabecera: #D9CEC1; /* Marrón más claro para Nav y Footer */
-            --marron-cuadro: #C8B9A6;    /* Marrón para el recuadro del texto */
+            --marron-cabecera: #D9CEC1;
+            --marron-cuadro: #C8B9A6;
             --blanco: #FFFFFF;
-            --beige-fondo: #F5F1EB;      /* Fondo general suave */
+            --beige-fondo: #F5F1EB;
             --texto-oscuro: #2A211B;
             --texto-secundario: #4A3E37;
             --rojo-error: #E74C3C;
+            --verde-exito: #1E8449;
         }
 
         body {
@@ -31,7 +35,7 @@
             line-height: 1.7;
         }
 
-        /* BARRA DE NAVEGACIÓN (Marrón claro) */
+        /* BARRA DE NAVEGACIÓN */
         nav {
             display: flex;
             justify-content: space-between;
@@ -71,6 +75,11 @@
             font-family: 'Poppins', sans-serif;
         }
 
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
         .btn-signin {
             background-color: transparent;
             color: var(--texto-oscuro);
@@ -94,11 +103,11 @@
         /* SECCIÓN PRINCIPAL (HERO) */
         .hero {
             text-align: center;
-            padding: 50px 20px 30px;
+            padding: 40px 20px 30px;
         }
 
         .hero img.logo-grande {
-            max-width: 320px;
+            max-width: 300px;
             width: 100%;
             height: auto;
             margin-bottom: 15px;
@@ -120,7 +129,7 @@
             font-style: italic;
         }
 
-        /* GALERÍA / CARRUSEL DE IMÁGENES SLIDER */
+        /* CARRUSEL DE IMÁGENES */
         .carousel-container {
             max-width: 900px;
             height: 420px;
@@ -192,7 +201,7 @@
             font-size: 1.2rem;
         }
 
-        /* PIE DE PÁGINA / FOOTER (Marrón claro) */
+        /* PIE DE PÁGINA */
         footer {
             background-color: var(--marron-cabecera);
             padding: 25px 50px;
@@ -224,7 +233,7 @@
             color: var(--turquesa-oscuro);
         }
 
-        /* MODALES PARA LOGIN / SIGNUP / OTP */
+        /* MODALES */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -244,7 +253,7 @@
             padding: 35px 40px;
             border-radius: 12px;
             width: 90%;
-            max-width: 440px;
+            max-width: 460px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             position: relative;
             box-sizing: border-box;
@@ -253,7 +262,7 @@
         .modal-card h3 {
             margin-top: 0;
             color: var(--texto-oscuro);
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             text-align: center;
             font-family: 'Orbitron', sans-serif;
         }
@@ -274,7 +283,7 @@
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 14px;
             text-align: left;
         }
 
@@ -298,6 +307,7 @@
             font-size: 0.95rem;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
+            background-color: var(--blanco);
         }
 
         .form-group input:focus {
@@ -321,21 +331,25 @@
         .error-msg {
             color: var(--rojo-error);
             font-size: 0.85rem;
-            margin-top: 5px;
+            margin-top: 8px;
             display: none;
             text-align: center;
+            font-weight: 500;
         }
 
-        .otp-input {
-            letter-spacing: 12px;
-            font-size: 1.8rem !important;
+        .success-box {
+            background-color: #EAFAF1;
+            border: 1px solid #2ECC71;
+            color: var(--verde-exito);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.92rem;
             text-align: center;
-            font-weight: bold;
+            margin-top: 10px;
+            display: none;
         }
 
-        /* =================================================== */
-        /* REGLAS RESPONSIVAS PARA TABLETS Y TELÉFONOS MÓVILES */
-        /* =================================================== */
+        /* REGLAS RESPONSIVAS */
         @media (max-width: 768px) {
             nav {
                 padding: 15px 20px;
@@ -358,7 +372,7 @@
             }
 
             .hero img.logo-grande {
-                max-width: 220px;
+                max-width: 210px;
             }
 
             .hero h1 {
@@ -371,7 +385,7 @@
             }
 
             .carousel-container {
-                height: 220px; /* Reducimos la altura para que no ocupe toda la pantalla del móvil */
+                height: 220px;
                 margin: 0 15px 30px;
                 border-radius: 8px;
             }
@@ -384,7 +398,7 @@
 
             .info-section p {
                 font-size: 0.98rem;
-                text-align: left; /* Alineado a la izquierda en móvil para evitar huecos entre palabras */
+                text-align: left;
             }
 
             .highlight-box {
@@ -410,7 +424,7 @@
             }
 
             .form-grid {
-                grid-template-columns: 1fr; /* Pasa el formulario de registro a 1 sola columna ordenada */
+                grid-template-columns: 1fr;
             }
 
             .form-group.full-width {
@@ -447,7 +461,7 @@
         </div>
     </div>
 
-    <!-- SECCIÓN DE TEXTO INFORMATIVO EXTENSO -->
+    <!-- SECCIÓN DE TEXTO INFORMATIVO -->
     <section class="info-section">
         <p>
             En <strong>C Telemetry AI</strong> hemos desarrollado una plataforma tecnológica pionera de mantenimiento predictivo basada en redes de procesamiento de telemetría y algoritmos de Inteligencia Artificial de última generación. A diferencia de los lectores mecánicos tradicionales que solo registran averías cuando el daño ya es irreparable, nuestra arquitectura de diagnóstico continuo se conecta directamente a la red CAN Bus del vehículo para interpretar las fluctuaciones térmicas, presiones y desviaciones operativas en tiempo real.
@@ -467,7 +481,7 @@
         </div>
     </section>
 
-    <!-- PIE DE PÁGINA (FOOTER) -->
+    <!-- PIE DE PÁGINA -->
     <footer>
         <div class="copyright">
             © 2026 C Telemetry AI. Todos los derechos reservados.
@@ -478,7 +492,7 @@
         </div>
     </footer>
 
-    <!-- MODAL REGISTRO -->
+    <!-- MODAL REGISTRO (SIGN IN) -->
     <div class="modal-overlay" id="modal-signup">
         <div class="modal-card">
             <span class="close-btn" onclick="cerrarModal('modal-signup')">&times;</span>
@@ -502,7 +516,7 @@
                         <input type="email" id="reg-email" required>
                     </div>
                     <div class="form-group full-width">
-                        <label>Contraseña</label>
+                        <label>Contraseña (mínimo 6 caracteres)</label>
                         <input type="password" id="reg-pass1" minlength="6" required>
                     </div>
                     <div class="form-group full-width">
@@ -510,31 +524,14 @@
                         <input type="password" id="reg-pass2" minlength="6" required>
                     </div>
                 </div>
-                <div class="error-msg" id="reg-error">Las contraseñas no coinciden.</div>
-                <button type="submit" class="btn btn-submit">Enviar Código de Verificación</button>
+                <div class="error-msg" id="reg-error"></div>
+                <div class="success-box" id="reg-success"></div>
+                <button type="submit" id="btn-reg-submit" class="btn btn-submit">Registrarse y Enviar Correo</button>
             </form>
         </div>
     </div>
 
-    <!-- MODAL OTP VERIFICACIÓN -->
-    <div class="modal-overlay" id="modal-otp">
-        <div class="modal-card">
-            <span class="close-btn" onclick="cerrarModal('modal-otp')">&times;</span>
-            <h3>Verificación de Correo</h3>
-            <p style="font-size: 0.9rem; color: var(--texto-secundario); text-align: center;">
-                Introduce el código de 6 dígitos enviado a tu email.
-            </p>
-            <form onsubmit="verificarOTP(event)">
-                <div class="form-group">
-                    <input type="text" id="otp-code" class="otp-input" maxlength="6" placeholder="000000" required>
-                </div>
-                <div class="error-msg" id="otp-error">El código introducido no es correcto.</div>
-                <button type="submit" class="btn btn-submit">Verificar y Activar Cuenta</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- MODAL LOGIN -->
+    <!-- MODAL LOGIN (LOG IN) -->
     <div class="modal-overlay" id="modal-login">
         <div class="modal-card">
             <span class="close-btn" onclick="cerrarModal('modal-login')">&times;</span>
@@ -548,15 +545,28 @@
                     <label>Contraseña</label>
                     <input type="password" id="login-pass" required>
                 </div>
-                <div class="error-msg" id="login-error">Correo o contraseña incorrectos.</div>
-                <button type="submit" class="btn btn-submit">Entrar al Panel</button>
+                <div class="error-msg" id="login-error"></div>
+                <button type="submit" id="btn-login-submit" class="btn btn-submit">Entrar al Panel</button>
             </form>
         </div>
     </div>
 
     <script>
-        let codigoGenerado = null;
-        let datosRegistroTemporal = null;
+        // =========================================================================
+        // CLAVES DE CONEXIÓN A SUPABASE CONFIGURADAS
+        // =========================================================================
+        const SUPABASE_URL = 'https://rfhmmkgmghqqhietcwgb.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_TqeGkrzld3HnD_kdkCT-sg_u2-jt9Bs';
+
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Redirección automática cuando el usuario confirma el correo y vuelve a la web
+        supabaseClient.auth.onAuthStateChange((event, session) => {
+            if (event === 'SIGNED_IN' && session && (window.location.hash.includes('access_token') || window.location.search.includes('code='))) {
+                alert('¡Correo electrónico verificado correctamente! Bienvenido a C Telemetry AI.');
+                window.location.href = 'dashboard.html';
+            }
+        });
 
         function abrirModal(id) {
             document.getElementById(id).style.display = 'flex';
@@ -566,65 +576,90 @@
             document.getElementById(id).style.display = 'none';
         }
 
-        function procesarRegistro(event) {
+        // REGISTRO UNIFICADO CON ENVÍO DE CORREO DE VERIFICACIÓN
+        async function procesarRegistro(event) {
             event.preventDefault();
+            const nombre = document.getElementById('reg-nombre').value.trim();
+            const apellidos = document.getElementById('reg-apellidos').value.trim();
+            const edad = document.getElementById('reg-edad').value;
+            const email = document.getElementById('reg-email').value.trim();
             const pass1 = document.getElementById('reg-pass1').value;
             const pass2 = document.getElementById('reg-pass2').value;
+
             const errorEl = document.getElementById('reg-error');
+            const successEl = document.getElementById('reg-success');
+            const btnSubmit = document.getElementById('btn-reg-submit');
+
+            errorEl.style.display = 'none';
+            successEl.style.display = 'none';
 
             if (pass1 !== pass2) {
+                errorEl.textContent = 'Las contraseñas no coinciden.';
                 errorEl.style.display = 'block';
                 return;
             }
-            errorEl.style.display = 'none';
 
-            datosRegistroTemporal = {
-                nombre: document.getElementById('reg-nombre').value,
-                apellidos: document.getElementById('reg-apellidos').value,
-                edad: document.getElementById('reg-edad').value,
-                email: document.getElementById('reg-email').value,
-                pass: pass1
-            };
+            btnSubmit.disabled = true;
+            btnSubmit.textContent = 'Creando cuenta y enviando correo...';
 
-            codigoGenerado = Math.floor(100000 + Math.random() * 900000).toString();
-            alert(`[SIMULACIÓN DE CORREO ENVIADO A ${datosRegistroTemporal.email}]\n\nTu código de verificación de 6 dígitos es: ${codigoGenerado}`);
+            const { data, error } = await supabaseClient.auth.signUp({
+                email: email,
+                password: pass1,
+                options: {
+                    emailRedirectTo: 'https://luccaa06.github.io/C-telemetry-ai/',
+                    data: {
+                        nombre: nombre,
+                        apellidos: apellidos,
+                        edad: parseInt(edad)
+                    }
+                }
+            });
 
-            cerrarModal('modal-signup');
-            abrirModal('modal-otp');
-        }
+            btnSubmit.disabled = false;
+            btnSubmit.textContent = 'Registrarse y Enviar Correo';
 
-        function verificarOTP(event) {
-            event.preventDefault();
-            const codigoIngresado = document.getElementById('otp-code').value;
-            const errorEl = document.getElementById('otp-error');
-
-            if (codigoIngresado === codigoGenerado) {
-                localStorage.setItem(datosRegistroTemporal.email, JSON.stringify(datosRegistroTemporal));
-                alert("¡Cuenta verificada y registrada con éxito! Ya puedes iniciar sesión.");
-                cerrarModal('modal-otp');
-                abrirModal('modal-login');
-            } else {
+            if (error) {
+                errorEl.textContent = 'Error al registrar: ' + error.message;
                 errorEl.style.display = 'block';
+                return;
             }
+
+            document.getElementById('form-signup').reset();
+            successEl.innerHTML = `<strong>¡Registro casi listo!</strong><br>Hemos enviado un enlace de verificación a <b>${email}</b>. Revisa tu bandeja de entrada (o Spam) y haz clic en el enlace para activar tu cuenta.`;
+            successEl.style.display = 'block';
         }
 
-        function procesarLogin(event) {
+        // INICIO DE SESIÓN CONTRA LA BASE DE DATOS
+        async function procesarLogin(event) {
             event.preventDefault();
-            const email = document.getElementById('login-email').value;
+            const email = document.getElementById('login-email').value.trim();
             const pass = document.getElementById('login-pass').value;
             const errorEl = document.getElementById('login-error');
+            const btnLogin = document.getElementById('btn-login-submit');
 
-            const usuarioGuardado = localStorage.getItem(email);
+            errorEl.style.display = 'none';
+            btnLogin.disabled = true;
+            btnLogin.textContent = 'Verificando credenciales...';
 
-            if (usuarioGuardado) {
-                const usuario = JSON.parse(usuarioGuardado);
-                if (usuario.pass === pass) {
-                    window.location.href = 'dashboard.html';
-                    return;
+            const { data, error } = await supabaseClient.auth.signInWithPassword({
+                email: email,
+                password: pass
+            });
+
+            btnLogin.disabled = false;
+            btnLogin.textContent = 'Entrar al Panel';
+
+            if (error) {
+                if (error.message.includes('Email not confirmed')) {
+                    errorEl.textContent = 'Aún no has verificado tu correo. Haz clic en el enlace que enviamos a tu bandeja de entrada.';
+                } else {
+                    errorEl.textContent = 'Correo o contraseña incorrectos.';
                 }
+                errorEl.style.display = 'block';
+                return;
             }
 
-            errorEl.style.display = 'block';
+            window.location.href = 'dashboard.html';
         }
     </script>
 </body>
