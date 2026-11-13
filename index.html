@@ -117,12 +117,57 @@
                     <label>Correo Electrónico</label>
                     <input type="email" id="login-email" placeholder="ejemplo@correo.com" required>
                 </div>
-                <div class="form-group" style="margin-bottom: 14px;">
+                <div class="form-group" style="margin-bottom: 8px;">
                     <label>Contraseña</label>
                     <input type="password" id="login-pass" required>
                 </div>
+                <a href="#" class="forgot-link" onclick="abrirRecuperacion(event)">¿Has olvidado tu contraseña?</a>
                 <div class="error-msg" id="login-error"></div>
                 <button type="submit" id="btn-login-submit" class="btn btn-submit">Entrar al Panel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL SOLICITAR RECUPERACIÓN DE CONTRASEÑA -->
+    <div class="modal-overlay" id="modal-forgot">
+        <div class="modal-card">
+            <span class="close-btn" onclick="cerrarModal('modal-forgot')">&times;</span>
+            <h3>Recuperar Clave</h3>
+            <p style="font-size: 0.9rem; color: var(--texto-secundario); text-align: center; margin-top: 0;">
+                Introduce el correo con el que te registraste y te enviaremos un enlace para restablecer tu contraseña.
+            </p>
+            <form id="form-forgot" onsubmit="procesarOlvido(event)">
+                <div class="form-group" style="margin-bottom: 14px;">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="forgot-email" placeholder="ejemplo@correo.com" required>
+                </div>
+                <div class="error-msg" id="forgot-error"></div>
+                <div class="success-box" id="forgot-success"></div>
+                <button type="submit" id="btn-forgot-submit" class="btn btn-submit">Enviar Enlace de Recuperación</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL ESTABLECER NUEVA CONTRASEÑA (TRAS PULSAR EL ENLACE DEL CORREO) -->
+    <div class="modal-overlay" id="modal-reset-password">
+        <div class="modal-card">
+            <span class="close-btn" onclick="cerrarModal('modal-reset-password')">&times;</span>
+            <h3>Nueva Contraseña</h3>
+            <p style="font-size: 0.9rem; color: var(--texto-secundario); text-align: center; margin-top: 0;">
+                Escribe tu nueva contraseña para acceder a tu cuenta.
+            </p>
+            <form id="form-reset" onsubmit="procesarNuevaPassword(event)">
+                <div class="form-group" style="margin-bottom: 14px;">
+                    <label>Nueva Contraseña (mín. 6 caracteres)</label>
+                    <input type="password" id="new-pass1" minlength="6" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 14px;">
+                    <label>Confirmar Nueva Contraseña</label>
+                    <input type="password" id="new-pass2" minlength="6" required>
+                </div>
+                <div class="error-msg" id="reset-error"></div>
+                <div class="success-box" id="reset-success"></div>
+                <button type="submit" id="btn-reset-submit" class="btn btn-submit">Guardar Nueva Contraseña</button>
             </form>
         </div>
     </div>
