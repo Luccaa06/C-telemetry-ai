@@ -6,11 +6,21 @@ const SUPABASE_ANON_KEY = 'sb_publishable_TqeGkrzld3HnD_kdkCT-sg_u2-jt9Bs';
 
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// Redirección automática cuando el usuario confirma el correo y vuelve a la web
+let modoRecuperacion = false;
+
+// Detectar eventos de autenticación (confirmación de cuenta o recuperación de clave)
 supabaseClient.auth.onAuthStateChange((event, session) => {
-    if (event === 'SIGNED_IN' && session && (window.location.hash.includes('access_token') || window.location.search.includes('code='))) {
-        alert('¡Correo electrónico verificado correctamente! Bienvenido a C Telemetry AI.');
-        window.location.href = 'dashboard.html';
+    if (event === 'PASSWORD_RECOVERY') {
+        modoRecuperacion = true;
+        abrirModal('modal-reset-password');
+        return;
+    }
+
+    if (event === 'SIGNED_IN' && session && !modoRecuperacion && !window.location.hash.includes('type=recovery')) {
+        if (window.location.hash.includes('access_token') || window.location.search.includes('code=')) {
+            alert('¡Correo electrónico verificado correctamente! Bienvenido a C Telemetry AI.');
+            window.location.href = 'dashboard.html';
+        }
     }
 });
 
@@ -20,6 +30,12 @@ function abrirModal(id) {
 
 function cerrarModal(id) {
     document.getElementById(id).style.display = 'none';
+}
+
+function abrirRecuperacion(event) {
+    event.preventDefault();
+    cerrarModal('modal-login');
+    abrirModal('modal-forgot');
 }
 
 // REGISTRO UNIFICADO CON ENVÍO DE CORREO DE VERIFICACIÓN
@@ -106,4 +122,77 @@ async function procesarLogin(event) {
     }
 
     window.location.href = 'dashboard.html';
+}
+
+// ENVIAR CORREO DE RECUPERACIÓN DE CONTRASEÑA
+async function procesarOlvido(event) {
+    event.preventDefault();
+    const email = document.getElementById('forgot-email').value.trim();
+    const errorEl = document.getElementById('forgot-error');
+    const successEl = document.getElementById('forgot-success');
+    const btnForgot = document.getElementById('btn-forgot-submit');
+
+    errorEl.style.display = 'none';
+    successEl.style.display = 'none';
+    btnForgot.disabled = true;
+    btnForgot.textContent = 'Enviando enlace...';
+
+    const { data, error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+        redirectTo: 'https://luccaa06.github.io/C-telemetry-ai/'
+    });
+
+    btnForgot.disabled = false;
+    btnForgot.textContent = 'Enviar Enlace de Recuperación';
+
+    if (error) {
+        errorEl.textContent = 'Error: ' + error.message;
+        errorEl.style.display = 'block';
+        return;
+    }
+
+    document.getElementById('form-forgot').reset();
+    successEl.innerHTML = `Hemos enviado un enlace de recuperación a <b>${email}</b>. Revisa tu bandeja de entrada o Spam.`;
+    successEl.style.display = 'block';
+}
+
+// GUARDAR LA NUEVA CONTRASEÑA
+async function procesarNuevaPassword(event) {
+    event.preventDefault();
+    const pass1 = document.getElementById('new-pass1').value;
+    const pass2 = document.getElementById('new-pass2').value;
+    const errorEl = document.getElementById('reset-error');
+    const successEl = document.getElementById('reset-success');
+    const btnReset = document.getElementById('btn-reset-submit');
+
+    errorEl.style.display = 'none';
+    successEl.style.display = 'none';
+
+    if (pass1 !== pass2) {
+        errorEl.textContent = 'Las contraseñas no coinciden.';
+        errorEl.style.display = 'block';
+        return;
+    }
+
+    btnReset.disabled = true;
+    btnReset.textContent = 'Actualizando contraseña...';
+
+    const { data, error } = await supabaseClient.auth.updateUser({
+        password: pass1
+    });
+
+    btnReset.disabled = false;
+    btnReset.textContent = 'Guardar Nueva Contraseña';
+
+    if (error) {
+        errorEl.textContent = 'Error al actualizar: ' + error.message;
+        errorEl.style.display = 'block';
+        return;
+    }
+
+    successEl.innerHTML = '<strong>¡Contraseña actualizada!</strong> Redirigiendo a tu panel privado...';
+    successEl.style.display = 'block';
+
+    setTimeout(() => {
+        window.location.href = 'dashboard.html';
+    }, 1800);
 }
